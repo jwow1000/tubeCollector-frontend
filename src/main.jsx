@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import Root from "./views/Root/Root.jsx";
+import Root, {loader as rootLoader} from "./views/Root/Root.jsx";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,6 +11,7 @@ const router = createBrowserRouter([
   {
     element: <Root />,
     path: "/",
+    loader: rootLoader,
     // errorElement: <ErrorPage />,
     children: [
       {
