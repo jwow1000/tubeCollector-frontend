@@ -1,21 +1,28 @@
-import { verifyUser, getProfile } from "./services/users.js";
+import { verifyUser } from "../../services/users.js";
+import { redirect, useLoaderData } from "react-router-dom";
+import { getTube } from "../../services/tubes.js";
+
+// the loader 
+async function loader() {
+ 
+  try {
+    const user = await getTube(1);
+    return user;
+  } catch(error) {
+    console.error(error);
+    return null;
+  }
+}
 
 function Root() {
+  // get the loader data
+  const loaderData = useLoaderData();
+  console.log(loaderData);
   return (
-    <div>Root</div>
+    <div>ROOOT</div>
   )
 }
 
-export default Root
+Root.loader = loader;  
 
-// the loader grabbing term and page params
-export async function loader( ) {
-  try {
-    const results = await fetchReleaseMax();
-    console.log( "root loader results", results );
-    return results;
-
-  } catch (error) {
-    return console.error(error);
-  }
-};
+export default Root;

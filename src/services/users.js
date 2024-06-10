@@ -13,22 +13,16 @@ export const signUp = async (credentials) => {
 };
 
 export const Login = async (credentials) => {
-  try {
-    const resp = await api.post("/users/login/", credentials);
-    localStorage.setItem("token", resp.data.access);
-    return resp.data.user;
-  } catch (error) {
-    throw error;
-  }
+  const resp = await api.post("/users/login/", credentials);
+  localStorage.setItem("token", resp.data.access);
+  return resp.data.user;
+  
 };
 
 export const signOut = async () => {
-  try {
-    localStorage.removeItem("token");
-    return true;
-  } catch (error) {
-    throw error;
-  }
+  localStorage.removeItem("token");
+  return true;
+
 };
 
 export const verifyUser = async () => {
@@ -45,51 +39,32 @@ export const verifyUser = async () => {
 
 //get profile by user id
 export const getProfile = async (id) => {
-  try {
-    const response = await api.get(`/users/${id}/`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await api.get(`/users/${id}/`);
+  return response.data;
+ 
 }
 
 // get all posts by user with profile id
 export const getUserPostsById = async (id) => {
-  try {
-    const response = await api.get(`profile/${id}/posts`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await api.get(`profile/${id}/posts`);
+  return response.data;
 }
 
 //edit profile
 export const editProfile = async (id, data) => {
-  try {
-    const response = await api.patch(`/users/${id}/`, data);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await api.patch(`/users/${id}/`, data);
+  return response.data;
 }
 
 // add like
 export const addLike = async (postID, profileID) => {
-  try {
-    const response = await api.patch(`posts/${postID}/add_like/${profileID}/`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await api.patch(`posts/${postID}/add_like/${profileID}/`);
+  return response.data;
 }
 
 // remove like
 export const removeLike = async (postID, profileID) => {
-  try {
-    const response = await api.patch(`posts/${postID}/remove_like/${profileID}/`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
+  const response = await api.patch(`posts/${postID}/remove_like/${profileID}/`);
+  return response.data;
 }
 
