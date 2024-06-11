@@ -1,28 +1,42 @@
+import { useState, useEffect } from "react";
 import { verifyUser } from "../../services/users.js";
-import { redirect, useLoaderData } from "react-router-dom";
-import { getTube } from "../../services/tubes.js";
+import { Outlet, useNavigate } from "react-router-dom";
 
-// the loader 
-async function loader() {
- 
-  try {
-    const user = await getTube(1);
-    return user;
-  } catch(error) {
-    console.error(error);
-    return null;
-  }
-}
 
 function Root() {
-  // get the loader data
-  const loaderData = useLoaderData();
-  console.log(loaderData);
+  // define navigate
+  const navigate = useNavigate();
+
+  // set user state
+  const [user, setUser] = useState({
+    username: "",
+    email: ""
+  });
+  
+  // useEffect on mount
+  useEffect(() => {
+    async function verify() {
+      const user = verifyUser();
+      if( user.value ) {
+        setUser( user );
+        console.log('user: ', user);
+      } else {
+        navigate("login");
+      }
+    } 
+    verify();
+  },[]);
+
+  console.log("look at the loader data". loaderData)
+
+
+
   return (
-    <div>ROOOT</div>
+    <div>ROOOT
+      <p>hello: {user.username}</p>
+      <Outlet context={[user, setUser]} />
+    </div>
   )
 }
-
-Root.loader = loader;  
 
 export default Root;

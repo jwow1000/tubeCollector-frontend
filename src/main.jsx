@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import Root from "./views/Root/Root.jsx";
 import Login from "./views/Login/Login.jsx";
+import SignIn from './components/SignIn.jsx';
+import Register from './components/Register.jsx';
 import Home from './views/Home/Home.jsx';
 import {
   createBrowserRouter,
@@ -11,21 +13,33 @@ import './index.css'
 
 
 const router = createBrowserRouter([
+
   {
     element: <Root />,
     path: "/",
-    loader: Root.loader,
     // errorElement: <ErrorPage />,
     children: [
       {
+        element: <Home />,
         path: "home",
-        element: <Home />
       },
       {
+        element: <Login />,
         path: "login",
-        element: <Login />
+        children: [
+          {
+            element: <SignIn />,
+            path: "signin",
+            action: SignIn.action
+          },
+          {
+            element: <Register />,
+            path: "register",
+            action: Register.action
+          },
+
+        ]
       },
-      
     ]
   },
   

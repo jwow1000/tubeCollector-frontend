@@ -1,0 +1,28 @@
+.root {
+  text-align: center;
+  font-size: 3rem;
+}
+
+.regButton {
+  text-align: left;
+}
+
+.logButton {
+  text-align: right;
+}
+
+.logForm {
+  position: absolute;
+  width: 50vw;
+  height: 70vh;
+  margin: 0 auto;
+  background-color: red;
+}
+
+.regForm {
+  position: absolute;
+  width: 50vw;
+  height: 70vh;
+  margin: 0 auto;
+  background-color: red;
+}

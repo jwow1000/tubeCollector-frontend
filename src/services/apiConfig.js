@@ -9,7 +9,6 @@ const getToken = () => {
 
 const api = axios.create({
   baseURL:
-    // "http://127.0.0.1:8000" 
     process.env.NODE_ENV === "production"
       ? "https://your-deployed-app.herokuapp.com"
       : "http://127.0.0.1:8000",
