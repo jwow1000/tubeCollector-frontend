@@ -1,10 +1,19 @@
 import { useLoaderData } from "react-router-dom";
 import { getPlaylist } from "../../services/playlists.js";
+import { youtube_parser, convertVid } from "../../services/imgHandle.js";
 import styles from './plistStyles.module.css';
 
 async function loader({params}) {
   const data = await getPlaylist(params.id);
   return data;
+}
+
+// make an embed from any type of youtube link
+const handleUtubeURL = (path) => {
+  const link = youtube_parser(path);
+  // console.log('whats this link look like', link);
+  const embed = `https://www.youtube.com/embed/${link}`;
+  return embed ? embed : null;
 }
 
 function Playlist() {
@@ -18,7 +27,7 @@ function Playlist() {
       <h1>{title}</h1>
       {
         tubes?.map((item, idx) => (
-          <p
+          <div
             key={`tube-${idx}`}
             className={styles.tube}
             style={{
@@ -26,8 +35,24 @@ function Playlist() {
               'top': `${item.posY * 100}%`
             }}
           > 
-            {item.url}
-          </p>
+            <img 
+              src={ convertVid(item.url) } 
+              alt={item.title}
+              className={styles.tubePic}
+            >
+                
+            </img>
+            {/* <iframe
+              src={ handleUtubeURL(item.url) }
+              title={item.title} 
+              className={styles.video}
+              allowFullScreen="true"
+            >
+  
+            </iframe> */}
+            {item.title}
+            {item.description}
+          </div>
         ))
       }
     </div>
