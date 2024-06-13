@@ -6,3 +6,4 @@ export async function getTube(id) {
   const response = await api.get(`/tubes/${id}`);
   return response.data;
 }
+

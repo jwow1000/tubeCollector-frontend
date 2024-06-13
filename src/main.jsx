@@ -4,6 +4,7 @@ import Root from "./views/Root/Root.jsx";
 import Login from "./views/Login/Login.jsx";
 import SignIn from './components/SignIn.jsx';
 import Register from './components/Register.jsx';
+import Playlist from './views/Playlist/Playlist.jsx';
 import Home from './views/Home/Home.jsx';
 import {
   createBrowserRouter,
@@ -22,6 +23,7 @@ const router = createBrowserRouter([
       {
         element: <Home />,
         path: "home",
+        loader: Home.loader
       },
       {
         element: <Login />,
@@ -40,6 +42,11 @@ const router = createBrowserRouter([
 
         ]
       },
+      {
+        element: <Playlist />,
+        path: "playlists/:id",
+        loader: Playlist.loader
+      }
     ]
   },
   

@@ -32,7 +32,6 @@ async function action({ request }) {
   }
 
   // otherwise create the user and redirect
-
   try {
     const logObj = {
       'username': username,
@@ -41,7 +40,6 @@ async function action({ request }) {
       errorMsg: "" 
     }
     const userData = await loginUser( logObj ); // Fixed variable name to match
-    
     return userData;
   } catch (error) {
     // return errors
@@ -59,7 +57,7 @@ function SignIn() {
   
   if(actionData) {
     setUser(actionData);
-    navigate("/");
+    navigate("/home");
   }
 
   console.log('action data: ', actionData);
@@ -68,17 +66,26 @@ function SignIn() {
   return (
     <Form method="post">
       <p>
-        <input type="text" name="email" />
+        <input 
+          type="text" 
+          name="email" 
+          required
+          autoComplete='off'
+        />
       </p>
 
       <p>
-        <input type="text" name="password" />
+        <input 
+          type="password"
+          name="password"
+          required
+          autoComplete="off"
+        />
       </p>
 
       <p>
         <button type="submit">Sign up</button>
       </p>
-      <input type='text' hidden value={"poop"}/>
     </Form>
   )
 }

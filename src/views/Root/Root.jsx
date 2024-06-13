@@ -8,26 +8,24 @@ function Root() {
   const navigate = useNavigate();
 
   // set user state
-  const [user, setUser] = useState({
-    username: "",
-    email: ""
-  });
+  const [user, setUser] = useState({});
   
   // useEffect on mount
   useEffect(() => {
     async function verify() {
-      const user = verifyUser();
-      if( user.value ) {
+      const user = await verifyUser();
+      if( user ) {
         setUser( user );
         console.log('user: ', user);
+        // navigate('home');
       } else {
-        navigate("login");
+        console.log("user not verified bitch")
+        // navigate("login/signin");
       }
     } 
     verify();
   },[]);
 
-  console.log("look at the loader data". loaderData)
 
 
 
