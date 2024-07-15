@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useActionData, Form, useOutletContext} from 'react-router-dom';
-import { loginUser } from '../services/users.js';
+import { signIn } from '../services/users.js';
 
 async function action({ request }) {
   // get global user stuff
@@ -13,6 +13,7 @@ async function action({ request }) {
   // });
   // get the formData
   const formData = await request.formData();
+  console.log( "form data signin", formData)
   const username = formData.get("email");
   const password = formData.get("password");
   const errors = {};
@@ -36,10 +37,10 @@ async function action({ request }) {
     const logObj = {
       'username': username,
       'password': password,
-      isError: false,
-      errorMsg: "" 
+      "isError": false,
+      "errorMsg": ""
     }
-    const userData = await loginUser( logObj ); // Fixed variable name to match
+    const userData = await signIn( logObj ); 
     return userData;
   } catch (error) {
     // return errors
@@ -52,12 +53,13 @@ async function action({ request }) {
 
 function SignIn() {
   const actionData = useActionData();
+  console.log( 'action Data sign in', actionData);
   const [user, setUser] = useOutletContext();
   const navigate = useNavigate();
   
   if(actionData) {
     setUser(actionData);
-    navigate("/home");
+    navigate("/");
   }
 
   console.log('action data: ', actionData);

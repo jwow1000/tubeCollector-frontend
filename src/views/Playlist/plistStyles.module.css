@@ -1,6 +1,7 @@
 .root {
   position: fixed;
-  top: 0;
+  
+  top: 3rem;
   width: 100vw;
   height: 100vh;
   background-size: 10vw 10vw;
@@ -10,7 +11,7 @@
 }
 
 .tube {
-  position: fixed;
+  position: absolute;
   width: 10vw;
   height: 10vw;
 }
@@ -19,6 +20,14 @@
   object-fit: contain;
   max-height: 100%;
   max-width: 100%;
+}
+
+.title {
+  position: fixed;
+  top: -1rem;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .video {

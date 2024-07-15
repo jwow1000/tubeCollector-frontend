@@ -2,8 +2,9 @@ import { getPlaylists } from "../../services/playlists.js";
 import { useLoaderData, Link } from "react-router-dom";
 
 async function loader() {
-  const data = await getPlaylists();
-  return data;
+  // const data = await getPlaylists();
+  // return data;
+  return null;
 }
 
 function Home() {

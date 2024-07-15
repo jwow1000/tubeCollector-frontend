@@ -24,7 +24,7 @@ function Playlist() {
   
   return (
     <div className={styles.root}>
-      <h1>{title}</h1>
+      <h1 className={styles.title}>{title}</h1>
       {
         tubes?.map((item, idx) => (
           <div
@@ -35,21 +35,21 @@ function Playlist() {
               'top': `${item.posY * 100}%`
             }}
           > 
-            <img 
+            {/* <img 
               src={ convertVid(item.url) } 
               alt={item.title}
               className={styles.tubePic}
             >
                 
-            </img>
-            {/* <iframe
+            </img> */}
+            <iframe
               src={ handleUtubeURL(item.url) }
               title={item.title} 
               className={styles.video}
               allowFullScreen="true"
             >
   
-            </iframe> */}
+            </iframe>
             {item.title}
             {item.description}
           </div>

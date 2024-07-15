@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { verifyUser } from "../../services/users.js";
-import { Outlet, useNavigate } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 
 
 function Root() {
@@ -12,26 +12,27 @@ function Root() {
   
   // useEffect on mount
   useEffect(() => {
-    async function verify() {
+    const fetchUser = async () => {
       const user = await verifyUser();
-      if( user ) {
-        setUser( user );
-        console.log('user: ', user);
-        // navigate('home');
-      } else {
-        console.log("user not verified bitch")
-        // navigate("login/signin");
-      }
-    } 
-    verify();
-  },[]);
+      user ? setUser(user) : setUser(null);
+    };
+
+    fetchUser();
+  }, []);
 
 
-
+  console.log("user? : ", user.username);
 
   return (
-    <div>ROOOT
-      <p>hello: {user.username}</p>
+    <div>
+      <p>user: {user.username}</p>
+      {
+        !user.username &&
+          <NavLink to="Login">
+            Login Yo!
+          </NavLink>  
+      }
+
       <Outlet context={[user, setUser]} />
     </div>
   )
